@@ -43,8 +43,9 @@
       (doseq [x (range (- x-max) x-max 2)]
         (stem x)))))
 
-(q/defsketch dancer
-  :host "host"
-  :size [500 500]
-  :setup setup
-  :draw draw)
+(defn -main [& args]
+  (q/defsketch dancer
+    :host "host"
+    :size [500 500]
+    :setup setup
+    :draw draw))
