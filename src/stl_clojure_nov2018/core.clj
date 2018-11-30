@@ -33,7 +33,10 @@
     (q/bezier base-x 0 base-x 0
               0 (- x-max) x y)))
 (defn draw []
-  (q/background 255)
+  (q/background (mod (q/mouse-y) 255)
+                (mod (q/mouse-x) 255)
+                (mod (- (q/mouse-y)
+                        (q/mouse-x)) 255))
   (q/stroke (mod (q/mouse-x) 255)
             (mod (q/mouse-y) 255)
             (mod (- (q/mouse-x)
