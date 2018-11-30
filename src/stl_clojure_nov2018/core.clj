@@ -1,6 +1,2 @@
-(ns stl-clojure-nov2018.core)
-
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
+(ns stl-clojure-nov2018.core
+  (:require [quil.core :as q]))
