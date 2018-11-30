@@ -49,3 +49,8 @@
     :size [500 500]
     :setup setup
     :draw draw))
+
+(comment ; CDDD > TDD
+  (do
+    (-main)
+    ))
