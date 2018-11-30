@@ -46,7 +46,8 @@
           (mod (- (q/mouse-x)
                   (q/mouse-y)) 255))
   (q/stroke-weight 1)
-  (q/text (str "mouse x=" (q/mouse-x) " mouse-y=" (q/mouse-y)) 20 20)
+  (q/text-font (q/create-font "Fira Code" 22))
+  (q/text (str "mouse x=" (q/mouse-x) " mouse-y=" (q/mouse-y)) 25 25)
   (q/no-fill)
   (let [size (q/width)
         x-max (/ size 4)]
