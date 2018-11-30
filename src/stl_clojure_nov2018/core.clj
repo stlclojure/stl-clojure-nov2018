@@ -34,7 +34,10 @@
               0 (- x-max) x y)))
 (defn draw []
   (q/background 255)
-  (q/stroke 0)
+  (q/stroke (mod (q/mouse-x) 255)
+            (mod (q/mouse-y) 255)
+            (mod (- (q/mouse-x)
+                    (q/mouse-y)) 255))
   (q/stroke-weight 1)
   (q/no-fill)
   (let [size (q/width)
