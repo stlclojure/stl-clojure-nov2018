@@ -2,22 +2,49 @@
   (:require [quil.core :as q]))
 
 (defn setup []
-  (q/frame-rate 10)
-  (q/background 200))                 ; Set the background colour to
-                                        ; a nice shade of grey.
+  (q/frame-rate 30))
+
+(defn pulse [low high rate]
+  (let [diff (- high low)
+        half (/ diff 2)
+        mid (+ low half)
+        s (/ (q/millis) 1000.0)
+        x (q/sin (* s (/ 1.0 rate)))]
+    (+ mid (* x half))))
+
+(defn t []
+  (* 0.001 (q/millis)))
+
+(def speed 0.5)
+
+(defn stem [base-x]
+  (let [magic (/ 8 (q/width))
+        x-max (/ (q/width) 4)
+        x-max-top (/ x-max 2)
+        y-max (/ (q/height) 2)
+
+        x (+ base-x
+             (pulse (- x-max-top) x-max-top 1.0))
+        y (+ (- y-max)
+             (* 0.5 y-max
+                (q/sin (+ (* speed (t))
+                          (* magic base-x))))
+             (* (/ 3) y-max (q/sin (* 2 (t)))))]
+    (q/bezier base-x 0 base-x 0
+              0 (- x-max) x y)))
 (defn draw []
-  (q/stroke (q/random 255))             ; Set the stroke colour to a random grey
-  (q/stroke-weight (q/random 10))       ; Set the stroke thickness randomly
-  (q/fill (q/random 255))               ; Set the fill colour to a random grey
+  (q/background 255)
+  (q/stroke 0)
+  (q/stroke-weight 1)
+  (q/no-fill)
+  (let [size (q/width)
+        x-max (/ size 4)]
+    (q/with-translation [(/ size 2) (q/height)]
+      (doseq [x (range (- x-max) x-max 2)]
+        (stem x)))))
 
-  (let [diam (q/random 100)             ; Set the diameter to a value between 0 and 100
-        x    (q/random (q/width))       ; Set the x coord randomly within the sketch
-        y    (q/random (q/height))]     ; Set the y coord randomly within the sketch
-    (q/ellipse x y diam diam)))         ; Draw a circle at x y with the correct diameter
-
-(q/defsketch example                  ; Define a new sketch named example
-  :title "Oh so many grey circles"    ; Set the title of the sketch
-  :settings #(q/smooth 2)             ; Turn on anti-aliasing
-  :setup setup                        ; Specify the setup fn
-  :draw draw                          ; Specify the draw fn
-  :size [323 200])                    ; You struggle to beat the golden ratio
+(q/defsketch dancer
+  :host "host"
+  :size [500 500]
+  :setup setup
+  :draw draw)
