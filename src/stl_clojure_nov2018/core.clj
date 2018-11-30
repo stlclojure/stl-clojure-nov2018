@@ -8,12 +8,12 @@
   (let [diff (- high low)
         half (/ diff 2)
         mid (+ low half)
-        s (/ (q/millis) 1000.0)
+        s (/ (q/mouse-x) 10.0)
         x (q/sin (* s (/ 1.0 rate)))]
     (+ mid (* x half))))
 
 (defn t []
-  (* 0.001 (q/millis)))
+  (* 0.01 (q/mouse-y)))
 
 (def speed 0.5)
 
