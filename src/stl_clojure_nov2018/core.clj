@@ -13,7 +13,7 @@
     (+ mid (* x half))))
 
 (defn t []
-  (* 0.01 (q/mouse-y)))
+  (* 0.0001 (q/mouse-y) (q/millis)))
 
 (def speed 0.5)
 
