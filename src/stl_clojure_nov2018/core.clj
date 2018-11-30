@@ -41,7 +41,12 @@
             (mod (q/mouse-y) 255)
             (mod (- (q/mouse-x)
                     (q/mouse-y)) 255))
+  (q/fill (mod (q/mouse-x) 255)
+          (mod (q/mouse-y) 255)
+          (mod (- (q/mouse-x)
+                  (q/mouse-y)) 255))
   (q/stroke-weight 1)
+  (q/text (str "mouse x=" (q/mouse-x) " mouse-y=" (q/mouse-y)) 20 20)
   (q/no-fill)
   (let [size (q/width)
         x-max (/ size 4)]
